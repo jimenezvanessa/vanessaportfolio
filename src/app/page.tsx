@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getProjects, getLogMetas } from '@/lib/data';
 import { Project, LogMeta } from '@/types';
 import TechBackground from '@/components/TechBackground';
@@ -67,16 +68,13 @@ function HeroSection() {
         <div className="flex justify-center md:justify-end animate-fade-in" style={{ animationDelay: '0.2s' }}>
           <div className="relative w-64 h-64 md:w-80 md:h-80">
             <div className="absolute inset-0 bg-gradient-to-br from-accent via-accent-secondary to-accent-tertiary rounded-3xl opacity-30 blur-2xl"></div>
-            <div className="relative h-full bg-card rounded-2xl border border-border flex items-center justify-center overflow-hidden">
-              <div className="text-center p-8">
-                <div className="w-40 h-40 mx-auto mb-4 rounded-full bg-gradient-to-br from-accent/30 to-accent-secondary/30 flex items-center justify-center">
-                  <svg className="w-20 h-20 text-accent" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                  </svg>
-                </div>
-                <p className="text-foreground-muted font-medium">Your Photo Here</p>
-                <p className="text-text-muted text-sm mt-1">Add to /public/profile.jpg</p>
-              </div>
+            <div className="relative h-full rounded-2xl overflow-hidden border border-border">
+              <Image 
+                src="/profile.jpg" 
+                alt="Vanessa" 
+                fill
+                className="object-cover"
+              />
             </div>
           </div>
         </div>
