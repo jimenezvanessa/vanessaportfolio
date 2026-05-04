@@ -6,50 +6,39 @@ interface Heart {
   id: number;
   x: number;
   y: number;
+  size: number;
 }
 
 export default function Cursor() {
   const [hearts, setHearts] = useState<Heart[]>([]);
-  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const updatePosition = (e: MouseEvent) => {
-      setIsVisible(true);
-    };
-
     const handleClick = (e: MouseEvent) => {
-      const newHeart: Heart = {
+      const mainHeart: Heart = {
         id: Date.now() + Math.random(),
         x: e.clientX,
         y: e.clientY,
+        size: 25,
       };
-      setHearts(prev => [...prev, newHeart]);
+      
+      const miniHearts: Heart[] = [
+        { id: Date.now() + 1, x: e.clientX - 20, y: e.clientY - 10, size: 12 },
+        { id: Date.now() + 2, x: e.clientX + 20, y: e.clientY - 15, size: 10 },
+        { id: Date.now() + 3, x: e.clientX - 10, y: e.clientY + 15, size: 8 },
+      ];
+      
+      setHearts(prev => [...prev, mainHeart, ...miniHearts]);
     };
 
-    const cleanup = () => {
-      setHearts(prev => {
-        const now = Date.now();
-        return prev.filter(h => now - (h.id % 1000000000) < 1000);
-      });
-    };
-
-    const interval = setInterval(cleanup, 500);
-
-    const handleMouseLeave = () => setIsVisible(false);
-    const handleMouseEnter = () => setIsVisible(true);
-
-    window.addEventListener('mousemove', updatePosition);
     window.addEventListener('click', handleClick);
-    window.addEventListener('mouseleave', handleMouseLeave);
-    window.addEventListener('mouseenter', handleMouseEnter);
+    return () => window.removeEventListener('click', handleClick);
+  }, []);
 
-    return () => {
-      window.removeEventListener('mousemove', updatePosition);
-      window.removeEventListener('click', handleClick);
-      window.removeEventListener('mouseleave', handleMouseLeave);
-      window.removeEventListener('mouseenter', handleMouseEnter);
-      clearInterval(interval);
-    };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHearts(prev => prev.filter(h => Date.now() - h.id < 2500));
+    }, 500);
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -62,11 +51,11 @@ export default function Cursor() {
             left: heart.x,
             top: heart.y,
             transform: 'translate(-50%, -50%)',
-            animation: 'floatUp 3s ease-out forwards',
-            filter: 'drop-shadow(0 0 8px #ff00ff) drop-shadow(0 0 15px #ff00ff) drop-shadow(0 0 25px #ff00ff)',
+            animation: 'floatUp 2.5s ease-out forwards',
+            filter: 'drop-shadow(0 0 6px #ff00ff) drop-shadow(0 0 12px #ff00ff)',
           }}
-          width="25"
-          height="25"
+          width={heart.size}
+          height={heart.size}
           viewBox="0 0 24 24"
         >
           <path
