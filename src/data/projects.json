@@ -1,0 +1,40 @@
+{
+  "projects": [
+    {
+      "id": "bossboard",
+      "title": "BossBoard",
+      "description": "A collaborative task management and productivity board application. Features include real-time updates, drag-and-drop task organization, and team collaboration tools.",
+      "techStack": ["React", "Node.js", "MongoDB", "Express", "Socket.io"],
+      "completionDate": "2025-12-15",
+      "category": "Fullstack",
+      "githubUrl": "https://github.com/jimenezvanessa/BossBoard"
+    },
+    {
+      "id": "web-calculator",
+      "title": "Web Calculator",
+      "description": "A modern, responsive web calculator with advanced mathematical functions, history tracking, and a clean user interface.",
+      "techStack": ["HTML", "CSS", "JavaScript"],
+      "completionDate": "2025-10-20",
+      "category": "Frontend",
+      "githubUrl": "https://github.com/jimenezvanessa/Web-Calculator"
+    },
+    {
+      "id": "teamnote03",
+      "title": "Teamnote03",
+      "description": "A collaborative note-taking and team documentation platform. Enables teams to create, share, and manage notes in real-time.",
+      "techStack": ["React", "Firebase", "CSS"],
+      "completionDate": "2025-11-28",
+      "category": "Fullstack",
+      "githubUrl": "https://github.com/jimenezvanessa/Teamnote03"
+    },
+    {
+      "id": "digital-stopwatch",
+      "title": "Digital Stopwatch",
+      "description": "A feature-rich digital stopwatch with lap timing, split times, and precision countdown functionality.",
+      "techStack": ["HTML", "CSS", "JavaScript"],
+      "completionDate": "2025-09-10",
+      "category": "Frontend",
+      "githubUrl": "https://github.com/jimenezvanessa/Digital-Stopwatch"
+    }
+  ]
+}
