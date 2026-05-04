@@ -61,8 +61,8 @@ export default function Cursor() {
             animation: `floatUpMulti 1.2s ease-out forwards`,
             animationDelay: `${heart.delay}s`,
           }}
-          width="16"
-          height="16"
+          width="20"
+          height="20"
           viewBox="0 0 24 24"
         >
           <path
