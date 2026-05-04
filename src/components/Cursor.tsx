@@ -1,24 +1,29 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-interface Heart {
+interface HeartData {
   id: number;
   x: number;
   y: number;
 }
 
 export default function Cursor() {
-  const [hearts, setHearts] = useState<Heart[]>([]);
+  const [hearts, setHearts] = useState<HeartData[]>([]);
+  const idCounter = useRef(0);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
-      const newHeart: Heart = {
-        id: Date.now() + Math.random(),
+      idCounter.current += 1;
+      const newHeart: HeartData = {
+        id: idCounter.current,
         x: e.clientX,
         y: e.clientY,
       };
-      setHearts(prev => [...prev, newHeart]);
+      setHearts(prev => {
+        const updated = [...prev, newHeart];
+        return updated.slice(-10);
+      });
     };
 
     window.addEventListener('click', handleClick);
@@ -26,11 +31,11 @@ export default function Cursor() {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setHearts(prev => prev.filter(h => Date.now() - h.id < 2500));
-    }, 500);
-    return () => clearInterval(interval);
-  }, []);
+    const timer = setTimeout(() => {
+      setHearts(prev => prev.slice(1));
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, [hearts]);
 
   return (
     <>
