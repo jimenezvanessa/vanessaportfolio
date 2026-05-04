@@ -286,3 +286,14 @@ html {
     transform: translate(-50%, -120%) scale(0.3);
   }
 }
+
+@keyframes floatUpSingle {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -150%) scale(0.5);
+  }
+}
