@@ -138,10 +138,7 @@ function FilterSection({
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
-    <a
-      href={project.githubUrl}
-      target="_blank"
-      rel="noopener noreferrer"
+    <div
       className="group block p-6 rounded-xl border border-border bg-card hover:border-accent/50 hover:shadow-xl hover:shadow-accent/10 hover:-translate-y-2 transition-all duration-300"
       style={{ animationDelay: `${0.05 * index}s` }}
     >
@@ -157,9 +154,16 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             {project.category}
           </span>
         </div>
-        <svg className="w-5 h-5 text-foreground-muted group-hover:text-accent transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-        </svg>
+        <a
+          href={project.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-foreground-muted hover:text-accent transition-colors"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
       </div>
       
       <p className="text-foreground-muted text-sm mb-4">{project.description}</p>
@@ -172,9 +176,21 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         ))}
       </div>
       
-      <p className="text-xs text-foreground-muted mt-4">
-        {new Date(project.completionDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
-      </p>
-    </a>
+      <div className="flex items-center justify-between mt-4">
+        <p className="text-xs text-foreground-muted">
+          {new Date(project.completionDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+        </p>
+        {project.demoUrl && (
+          <a
+            href={project.demoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs px-3 py-1.5 bg-accent text-white rounded-full font-medium hover:bg-accent/90 transition-colors"
+          >
+            Live Demo
+          </a>
+        )}
+      </div>
+    </div>
   );
 }

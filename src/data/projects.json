@@ -7,7 +7,8 @@
       "techStack": ["React", "Node.js", "MongoDB", "Express", "Socket.io"],
       "completionDate": "2025-12-15",
       "category": "Fullstack",
-      "githubUrl": "https://github.com/jimenezvanessa/BossBoard"
+      "githubUrl": "https://github.com/jimenezvanessa/BossBoard",
+      "demoUrl": "https://boss-board.vercel.app/"
     },
     {
       "id": "web-calculator",
@@ -25,7 +26,8 @@
       "techStack": ["React", "Firebase", "CSS"],
       "completionDate": "2025-11-28",
       "category": "Fullstack",
-      "githubUrl": "https://github.com/jimenezvanessa/Teamnote03"
+      "githubUrl": "https://github.com/jimenezvanessa/Teamnote03",
+      "demoUrl": "https://teamnote03.vercel.app/"
     },
     {
       "id": "digital-stopwatch",
