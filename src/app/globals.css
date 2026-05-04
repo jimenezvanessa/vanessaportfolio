@@ -1,30 +1,37 @@
 @import "tailwindcss";
 
 :root {
-  --base: #0f0f0f;
-  --surface: #1a1a2e;
-  --accent: #6366f1;
-  --accent-hover: #818cf8;
-  --highlight: #22d3ee;
-  --foreground: #ffffff;
-  --foreground-muted: #a1a1aa;
-  --card-bg: #1e1e32;
-  --border: #2d2d44;
+  --bg-primary: #0d0d0d;
+  --bg-secondary: #161616;
+  --bg-card: #1c1c1c;
+  --bg-elevated: #242424;
   
-  --background: var(--base);
-  --foreground: var(--foreground);
+  --accent: #f472b6;
+  --accent-secondary: #a78bfa;
+  --accent-tertiary: #22d3ee;
+  
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  
+  --border: #27272a;
+  --border-hover: #3f3f46;
+  
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-base: var(--base);
-  --color-surface: var(--surface);
+  --color-base: var(--bg-primary);
+  --color-surface: var(--bg-secondary);
   --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
-  --color-highlight: var(--highlight);
-  --color-foreground-muted: var(--foreground-muted);
-  --color-card: var(--card-bg);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-tertiary: var(--accent-tertiary);
+  --color-highlight: var(--accent-tertiary);
+  --color-foreground-muted: var(--text-secondary);
+  --color-card: var(--bg-card);
   --color-border: var(--border);
   
   --font-sans: var(--font-geist-sans), Inter, system-ui, sans-serif;
@@ -33,18 +40,24 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --base: #f8fafc;
-    --surface: #ffffff;
-    --accent: #6366f1;
-    --accent-hover: #4f46e5;
-    --highlight: #0891b2;
-    --foreground: #0f172a;
-    --foreground-muted: #64748b;
-    --card-bg: #ffffff;
-    --border: #e2e8f0;
+    --bg-primary: #fafafa;
+    --bg-secondary: #f4f4f5;
+    --bg-card: #ffffff;
+    --bg-elevated: #ffffff;
     
-    --background: var(--base);
-    --foreground: var(--foreground);
+    --accent: #db2777;
+    --accent-secondary: #7c3aed;
+    --accent-tertiary: #0891b2;
+    
+    --text-primary: #18181b;
+    --text-secondary: #52525b;
+    --text-muted: #a1a1aa;
+    
+    --border: #e4e4e7;
+    --border-hover: #d4d4d8;
+    
+    --background: var(--bg-primary);
+    --foreground: var(--text-primary);
   }
 }
 
@@ -83,4 +96,24 @@ html {
 
 .animate-slide-in {
   animation: slideIn 0.4s ease-out forwards;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary), var(--accent-tertiary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary), var(--accent-tertiary));
+  border-radius: inherit;
+  z-index: -1;
 }

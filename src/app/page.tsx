@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { getProjects, getLogMetas } from '@/lib/data';
 import { Project, LogMeta } from '@/types';
 
@@ -23,18 +22,21 @@ function HeroSection() {
     <section className="py-20 md:py-28">
       <div className="grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <p className="text-accent font-mono text-sm mb-4 animate-fade-in">Frontend Developer</p>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-            Hi, I&apos;m <span className="text-accent">Vanessa</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent text-sm font-medium mb-4">
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+            Open to work
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-in">
+            Hi, I&apos;m <span className="gradient-text">Vanessa</span>
           </h1>
-          <p className="text-lg text-foreground-muted mb-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            A passionate developer specializing in React, TypeScript, and modern web technologies. 
-            Currently interning at Makerspace Innovative Hub, building interactive and user-focused experiences.
+          <p className="text-lg text-foreground-muted mb-8 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+            A passionate frontend developer specializing in React, TypeScript, and modern web technologies. 
+            Currently building amazing things at Makerspace Innovative Hub.
           </p>
-          <div className="flex flex-wrap gap-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+          <div className="flex flex-wrap gap-4 animate-fade-in" style={{ animationDelay: '0.2s' }}>
             <Link 
               href="/work" 
-              className="px-6 py-3 bg-accent text-white rounded-lg font-medium hover:bg-accent/90 transition-all hover:scale-105"
+              className="px-6 py-3 bg-accent text-white rounded-lg font-medium hover:bg-accent/90 transition-all hover:scale-105 shadow-lg shadow-accent/25"
             >
               View Work
             </Link>
@@ -60,15 +62,16 @@ function HeroSection() {
         
         <div className="flex justify-center md:justify-end animate-fade-in" style={{ animationDelay: '0.2s' }}>
           <div className="relative w-64 h-64 md:w-80 md:h-80">
-            <div className="absolute inset-0 bg-gradient-to-br from-accent to-highlight rounded-2xl opacity-20"></div>
-            <div className="absolute inset-2 bg-card rounded-xl border border-border flex items-center justify-center overflow-hidden">
-              <div className="text-center p-6">
-                <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-accent/20 flex items-center justify-center">
-                  <svg className="w-16 h-16 text-accent" fill="currentColor" viewBox="0 0 24 24">
+            <div className="absolute inset-0 bg-gradient-to-br from-accent via-accent-secondary to-accent-tertiary rounded-3xl opacity-30 blur-2xl"></div>
+            <div className="relative h-full bg-card rounded-2xl border border-border flex items-center justify-center overflow-hidden">
+              <div className="text-center p-8">
+                <div className="w-40 h-40 mx-auto mb-4 rounded-full bg-gradient-to-br from-accent/30 to-accent-secondary/30 flex items-center justify-center">
+                  <svg className="w-20 h-20 text-accent" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                   </svg>
                 </div>
-                <p className="text-foreground-muted text-sm">Your Photo Here</p>
+                <p className="text-foreground-muted font-medium">Your Photo Here</p>
+                <p className="text-text-muted text-sm mt-1">Add to /public/profile.jpg</p>
               </div>
             </div>
           </div>
@@ -102,24 +105,29 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       href={project.githubUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="block p-6 rounded-xl border border-border bg-card hover:border-accent/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 animate-fade-in"
+      className="group block p-6 rounded-xl border border-border bg-card hover:border-accent/50 hover:shadow-xl hover:shadow-accent/10 hover:-translate-y-2 transition-all duration-300"
       style={{ animationDelay: `${0.1 * index}s` }}
     >
       <div className="flex items-start justify-between mb-3">
-        <h3 className="text-lg font-semibold">{project.title}</h3>
-        <svg className="w-5 h-5 text-foreground-muted flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-accent/20 to-accent-secondary/20 flex items-center justify-center">
+          <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+          </svg>
+        </div>
+        <svg className="w-5 h-5 text-foreground-muted group-hover:text-accent transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
         </svg>
       </div>
+      <h3 className="text-lg font-semibold mb-2 group-hover:text-accent transition-colors">{project.title}</h3>
       <p className="text-foreground-muted text-sm mb-4 line-clamp-2">{project.description}</p>
       <div className="flex flex-wrap gap-2">
         {project.techStack.slice(0, 3).map(tech => (
-          <span key={tech} className="text-xs px-2 py-1 bg-accent/10 text-accent rounded">
+          <span key={tech} className="text-xs px-2.5 py-1 bg-accent/10 text-accent rounded-full">
             {tech}
           </span>
         ))}
         {project.techStack.length > 3 && (
-          <span className="text-xs px-2 py-1 bg-foreground-muted/10 text-foreground-muted rounded">
+          <span className="text-xs px-2.5 py-1 bg-foreground-muted/10 text-foreground-muted rounded-full">
             +{project.techStack.length - 3}
           </span>
         )}
@@ -150,9 +158,9 @@ function TimelineSection({ logs }: { logs: LogMeta[] }) {
         </div>
       </div>
       
-      <div className="mt-8 p-4 bg-card border border-border rounded-lg text-center">
+      <div className="mt-8 p-6 bg-gradient-to-r from-accent/10 via-accent-secondary/10 to-accent-tertiary/10 border border-border rounded-xl text-center">
         <p className="text-foreground-muted">
-          Currently interning at <span className="text-accent font-medium">Makerspace Innovative Hub</span>
+          Currently interning at <span className="text-accent font-semibold">Makerspace Innovative Hub</span>
         </p>
       </div>
     </section>
@@ -164,17 +172,17 @@ function TimelineItem({ log, index }: { log: LogMeta; index: number }) {
   
   return (
     <div className={`relative flex items-center ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-      <div className="absolute left-4 w-8 h-8 bg-accent rounded-full flex items-center justify-center text-white text-sm font-medium md:left-1/2 md:-translate-x-1/2 z-10">
+      <div className="absolute left-4 w-10 h-10 bg-gradient-to-br from-accent to-accent-secondary rounded-full flex items-center justify-center text-white font-semibold md:left-1/2 md:-translate-x-1/2 z-10 shadow-lg shadow-accent/30">
         {log.week}
       </div>
       
-      <div className={`ml-12 md:ml-0 md:w-1/2 ${isEven ? 'md:pr-8 md:text-right' : 'md:pl-8'}`}>
+      <div className={`ml-14 md:ml-0 md:w-1/2 ${isEven ? 'md:pr-8 md:text-right' : 'md:pl-8'}`}>
         <Link 
           href={`/logs/${log.slug}`}
-          className="block p-4 rounded-lg border border-border bg-card hover:border-accent/50 hover:shadow transition-all"
+          className="block p-5 rounded-xl border border-border bg-card hover:border-accent/50 hover:shadow-lg hover:-translate-y-1 transition-all"
         >
-          <p className="text-xs text-foreground-muted mb-1">{log.date}</p>
-          <h3 className="font-medium mb-1">{log.title}</h3>
+          <p className="text-xs text-accent font-medium mb-2">{log.date}</p>
+          <h3 className="font-semibold mb-2">{log.title}</h3>
           <p className="text-sm text-foreground-muted line-clamp-2">{log.description}</p>
         </Link>
       </div>
@@ -184,12 +192,12 @@ function TimelineItem({ log, index }: { log: LogMeta; index: number }) {
 
 function SkillsSection() {
   const skills = [
-    { name: 'React', level: 90 },
-    { name: 'TypeScript', level: 85 },
-    { name: 'Next.js', level: 80 },
-    { name: 'Tailwind CSS', level: 90 },
-    { name: 'JavaScript', level: 85 },
-    { name: 'Node.js', level: 70 },
+    { name: 'React', level: 90, color: 'from-accent to-pink-500' },
+    { name: 'TypeScript', level: 85, color: 'from-accent-secondary to-blue-500' },
+    { name: 'Next.js', level: 80, color: 'from-accent-tertiary to-cyan-500' },
+    { name: 'Tailwind CSS', level: 90, color: 'from-emerald-500 to-green-500' },
+    { name: 'JavaScript', level: 85, color: 'from-yellow-500 to-orange-500' },
+    { name: 'Node.js', level: 70, color: 'from-green-500 to-emerald-500' },
   ];
 
   return (
@@ -197,14 +205,14 @@ function SkillsSection() {
       <h2 className="text-2xl font-semibold mb-8">Skills</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {skills.map((skill, index) => (
-          <div key={skill.name} className="animate-fade-in" style={{ animationDelay: `${0.1 * index}s` }}>
-            <div className="flex justify-between mb-2">
+          <div key={skill.name} className="p-5 rounded-xl border border-border bg-card">
+            <div className="flex justify-between mb-3">
               <span className="font-medium">{skill.name}</span>
               <span className="text-foreground-muted text-sm">{skill.level}%</span>
             </div>
             <div className="h-2 bg-border rounded-full overflow-hidden">
               <div 
-                className="h-full bg-accent rounded-full transition-all duration-1000"
+                className={`h-full bg-gradient-to-r ${skill.color} rounded-full transition-all duration-1000`}
                 style={{ width: `${skill.level}%` }}
               />
             </div>

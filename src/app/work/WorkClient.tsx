@@ -31,7 +31,7 @@ export default function WorkClient({ projects, techStacks, categories }: WorkCli
   return (
     <div className="max-w-6xl mx-auto px-6 py-12">
       <header className="mb-12">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">Work</h1>
+        <h1 className="text-4xl font-bold mb-4">Work</h1>
         <p className="text-foreground-muted text-lg">
           A collection of projects showcasing my skills in frontend development.
         </p>
@@ -96,9 +96,9 @@ function FilterSection({
           <button
             key={tech}
             onClick={() => onSelectTech(selectedTech === tech ? null : tech)}
-            className={`px-3 py-1.5 text-sm rounded-full border transition-all ${
+            className={`px-4 py-2 text-sm rounded-full border transition-all ${
               selectedTech === tech
-                ? 'bg-accent text-white border-accent'
+                ? 'bg-accent text-white border-accent shadow-lg shadow-accent/25'
                 : 'border-border hover:border-accent hover:text-accent'
             }`}
           >
@@ -113,9 +113,9 @@ function FilterSection({
           <button
             key={category}
             onClick={() => onSelectCategory(selectedCategory === category ? null : category)}
-            className={`px-3 py-1.5 text-sm rounded-full border transition-all ${
+            className={`px-4 py-2 text-sm rounded-full border transition-all ${
               selectedCategory === category
-                ? 'bg-accent text-white border-accent'
+                ? 'bg-accent text-white border-accent shadow-lg shadow-accent/25'
                 : 'border-border hover:border-accent hover:text-accent'
             }`}
           >
@@ -142,17 +142,22 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       href={project.githubUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="block p-6 rounded-xl border border-border bg-card hover:border-accent/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 animate-fade-in"
+      className="group block p-6 rounded-xl border border-border bg-card hover:border-accent/50 hover:shadow-xl hover:shadow-accent/10 hover:-translate-y-2 transition-all duration-300"
       style={{ animationDelay: `${0.05 * index}s` }}
     >
       <div className="flex items-start justify-between mb-3">
         <div>
-          <h3 className="text-lg font-semibold mb-1">{project.title}</h3>
-          <span className="text-xs px-2 py-0.5 bg-accent/10 text-accent rounded">
+          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-accent/20 to-accent-secondary/20 flex items-center justify-center mb-3">
+            <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+          </div>
+          <h3 className="text-lg font-semibold group-hover:text-accent transition-colors">{project.title}</h3>
+          <span className="text-xs px-2.5 py-1 bg-accent/10 text-accent rounded-full">
             {project.category}
           </span>
         </div>
-        <svg className="w-5 h-5 text-foreground-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 text-foreground-muted group-hover:text-accent transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
         </svg>
       </div>
@@ -161,7 +166,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       
       <div className="flex flex-wrap gap-2">
         {project.techStack.map(tech => (
-          <span key={tech} className="text-xs px-2 py-1 bg-foreground-muted/10 text-foreground-muted rounded">
+          <span key={tech} className="text-xs px-2.5 py-1 bg-foreground-muted/10 text-foreground-muted rounded-full">
             {tech}
           </span>
         ))}
