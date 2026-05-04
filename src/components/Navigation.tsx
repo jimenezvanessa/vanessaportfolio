@@ -27,7 +27,7 @@ export default function Navigation() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative text-foreground-muted hover:text-foreground transition-colors py-2 heart-hover ${isActive ? 'text-foreground' : ''}`}
+                className="relative text-foreground-muted hover:text-foreground transition-colors py-2"
               >
                 {link.label}
                 {isActive && (

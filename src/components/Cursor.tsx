@@ -6,6 +6,7 @@ interface Heart {
   id: number;
   x: number;
   y: number;
+  delay: number;
 }
 
 export default function Cursor() {
@@ -18,16 +19,16 @@ export default function Cursor() {
     };
 
     const handleClick = (e: MouseEvent) => {
-      const newHeart: Heart = {
-        id: Date.now(),
-        x: e.clientX,
-        y: e.clientY,
-      };
-      setHearts(prev => [...prev, newHeart]);
+      const newHearts: Heart[] = [
+        { id: Date.now(), x: e.clientX, y: e.clientY, delay: 0 },
+        { id: Date.now() + 1, x: e.clientX - 15, y: e.clientY - 10, delay: 0.1 },
+        { id: Date.now() + 2, x: e.clientX + 15, y: e.clientY - 10, delay: 0.2 },
+      ];
+      setHearts(prev => [...prev, ...newHearts]);
       
       setTimeout(() => {
-        setHearts(prev => prev.filter(h => h.id !== newHeart.id));
-      }, 1000);
+        setHearts(prev => prev.filter(h => !newHearts.find(nh => nh.id === h.id)));
+      }, 1200);
     };
 
     const handleMouseLeave = () => setIsVisible(false);
@@ -57,10 +58,11 @@ export default function Cursor() {
             left: heart.x,
             top: heart.y,
             transform: 'translate(-50%, -50%)',
-            animation: 'floatUp 1s ease-out forwards',
+            animation: `floatUpMulti 1.2s ease-out forwards`,
+            animationDelay: `${heart.delay}s`,
           }}
-          width="24"
-          height="24"
+          width="16"
+          height="16"
           viewBox="0 0 24 24"
         >
           <path
