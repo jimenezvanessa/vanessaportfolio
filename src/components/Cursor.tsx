@@ -6,7 +6,6 @@ interface Heart {
   id: number;
   x: number;
   y: number;
-  size: number;
 }
 
 export default function Cursor() {
@@ -14,20 +13,12 @@ export default function Cursor() {
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
-      const mainHeart: Heart = {
+      const newHeart: Heart = {
         id: Date.now() + Math.random(),
         x: e.clientX,
         y: e.clientY,
-        size: 25,
       };
-      
-      const miniHearts: Heart[] = [
-        { id: Date.now() + 1, x: e.clientX - 20, y: e.clientY - 10, size: 12 },
-        { id: Date.now() + 2, x: e.clientX + 20, y: e.clientY - 15, size: 10 },
-        { id: Date.now() + 3, x: e.clientX - 10, y: e.clientY + 15, size: 8 },
-      ];
-      
-      setHearts(prev => [...prev, mainHeart, ...miniHearts]);
+      setHearts(prev => [...prev, newHeart]);
     };
 
     window.addEventListener('click', handleClick);
@@ -54,8 +45,8 @@ export default function Cursor() {
             animation: 'floatUp 2.5s ease-out forwards',
             filter: 'drop-shadow(0 0 6px #ff00ff) drop-shadow(0 0 12px #ff00ff)',
           }}
-          width={heart.size}
-          height={heart.size}
+          width="25"
+          height="25"
           viewBox="0 0 24 24"
         >
           <path
