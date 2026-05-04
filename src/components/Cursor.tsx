@@ -62,11 +62,11 @@ export default function Cursor() {
             left: heart.x,
             top: heart.y,
             transform: 'translate(-50%, -50%)',
-            animation: 'floatUp 1s ease-out forwards',
+            animation: 'floatUp 3s ease-out forwards',
             filter: 'drop-shadow(0 0 8px #ff00ff) drop-shadow(0 0 15px #ff00ff) drop-shadow(0 0 25px #ff00ff)',
           }}
-          width="27"
-          height="27"
+          width="25"
+          height="25"
           viewBox="0 0 24 24"
         >
           <path
