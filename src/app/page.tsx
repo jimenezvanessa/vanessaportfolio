@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getProjects, getLogMetas } from '@/lib/data';
 import { Project, LogMeta } from '@/types';
+import TechBackground from '@/components/TechBackground';
 
 export default function Home() {
   const projects = getProjects();
@@ -8,12 +9,15 @@ export default function Home() {
   const logs = getLogMetas();
 
   return (
-    <div className="max-w-6xl mx-auto px-6">
-      <HeroSection />
-      <FeaturedProjects projects={featuredProjects} />
-      <TimelineSection logs={logs} />
-      <SkillsSection />
-    </div>
+    <>
+      <TechBackground />
+      <div className="max-w-6xl mx-auto px-6">
+        <HeroSection />
+        <FeaturedProjects projects={featuredProjects} />
+        <TimelineSection logs={logs} />
+        <SkillsSection />
+      </div>
+    </>
   );
 }
 
@@ -27,7 +31,7 @@ function HeroSection() {
             Open to work
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-in">
-            Hi, I&apos;m <span className="gradient-text">Vanessa</span>
+            Hi, I&apos;m <span className="neon-text">Vanessa</span>
           </h1>
           <p className="text-lg text-foreground-muted mb-8 animate-fade-in" style={{ animationDelay: '0.1s' }}>
             A passionate frontend developer specializing in React, TypeScript, and modern web technologies. 
