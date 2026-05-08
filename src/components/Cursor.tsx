@@ -24,9 +24,11 @@ export default function Cursor() {
   const [trails, setTrails] = useState<TrailHeart[]>([]);
   const idCounter = useRef(0);
   const lastPos = useRef({ x: 0, y: 0 });
+  const prevPos = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
+      prevPos.current = lastPos.current;
       lastPos.current = { x: e.clientX, y: e.clientY };
     };
 
@@ -45,8 +47,8 @@ export default function Cursor() {
         y: lastPos.current.y,
         createdAt: Date.now(),
       };
-      setTrails(prev => [...prev, newTrail].slice(-30));
-    }, 30);
+      setTrails(prev => [...prev, newTrail].slice(-60));
+    }, 16);
 
     return () => clearInterval(interval);
   }, []);
@@ -56,7 +58,7 @@ export default function Cursor() {
     
     const timer = setTimeout(() => {
       setTrails(prev => prev.slice(1));
-    }, 20);
+    }, 16);
     return () => clearTimeout(timer);
   }, [trails.length]);
 
@@ -64,7 +66,7 @@ export default function Cursor() {
     <>
       {trails.map((trail) => {
         const age = Date.now() - trail.createdAt;
-        const progress = Math.min(age / 500, 1);
+        const progress = Math.min(age / 800, 1);
         
         return (
           <div
