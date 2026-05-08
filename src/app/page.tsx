@@ -2,7 +2,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getProjects, getLogMetas } from '@/lib/data';
 import { Project, LogMeta } from '@/types';
-import TechBackground from '@/components/TechBackground';
 
 export default function Home() {
   const projects = getProjects();
@@ -11,12 +10,13 @@ export default function Home() {
 
   return (
     <>
-      <TechBackground />
       <div className="max-w-6xl mx-auto px-6">
         <HeroSection />
         <FeaturedProjects projects={featuredProjects} />
         <TimelineSection logs={logs} />
         <SkillsSection />
+        <CertificatesSection />
+        <ContactSection />
       </div>
     </>
   );
@@ -73,7 +73,9 @@ function HeroSection() {
                 src="/profile.jpg" 
                 alt="Vanessa" 
                 fill
+                sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover"
+                loading="eager"
               />
             </div>
           </div>
@@ -194,12 +196,12 @@ function TimelineItem({ log, index }: { log: LogMeta; index: number }) {
 
 function SkillsSection() {
   const skills = [
-    { name: 'React', level: 90, color: 'from-accent to-pink-500' },
-    { name: 'TypeScript', level: 85, color: 'from-accent-secondary to-blue-500' },
-    { name: 'Next.js', level: 80, color: 'from-accent-tertiary to-cyan-500' },
-    { name: 'Tailwind CSS', level: 90, color: 'from-emerald-500 to-green-500' },
-    { name: 'JavaScript', level: 85, color: 'from-yellow-500 to-orange-500' },
-    { name: 'Node.js', level: 70, color: 'from-green-500 to-emerald-500' },
+    { name: "React", level: 90, color: "from-accent to-pink-500" },
+    { name: "TypeScript", level: 85, color: "from-accent-secondary to-blue-500" },
+    { name: "Next.js", level: 80, color: "from-accent-tertiary to-cyan-500" },
+    { name: "Tailwind CSS", level: 90, color: "from-emerald-500 to-green-500" },
+    { name: "JavaScript", level: 85, color: "from-yellow-500 to-orange-500" },
+    { name: "Node.js", level: 70, color: "from-green-500 to-emerald-500" },
   ];
 
   return (
@@ -213,13 +215,117 @@ function SkillsSection() {
               <span className="text-foreground-muted text-sm">{skill.level}%</span>
             </div>
             <div className="h-2 bg-border rounded-full overflow-hidden">
-              <div 
+              <div
                 className={`h-full bg-gradient-to-r ${skill.color} rounded-full transition-all duration-1000`}
                 style={{ width: `${skill.level}%` }}
               />
             </div>
           </div>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function CertificatesSection() {
+  const certificates = [
+    {
+      id: 1,
+      title: "Frontend Development",
+      image: "/certificates/frontend-development.png",
+    },
+    {
+      id: 2,
+      title: "Responsive Web Design",
+      image: "/certificates/responsive-web-design.png",
+    },
+  ];
+
+  return (
+    <section className="py-16">
+      <h2 className="text-2xl font-semibold mb-8">Certificates</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {certificates.map((cert) => (
+          <div
+            key={cert.id}
+            className="group relative rounded-xl border border-border bg-card overflow-hidden hover:border-accent/50 hover:shadow-lg hover:-translate-y-1 transition-all"
+          >
+            <div className="aspect-video relative">
+              <Image
+                src={cert.image}
+                alt={cert.title}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-contain"
+              />
+            </div>
+            <div className="p-4 border-t border-border">
+              <h3 className="font-semibold">{cert.title}</h3>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function ContactSection() {
+  const contactInfo = {
+    email: "jimenezvanessac.27@gmail.com",
+    phone: "+639068540366",
+    resume: "https://www.canva.com/design/DAGlLDXGCqU/YqSo8c__3uJY-f6YiznjqA/edit",
+  };
+
+  return (
+    <section className="py-16">
+      <h2 className="text-2xl font-semibold mb-8">Get In Touch</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <a
+          href={`mailto:${contactInfo.email}`}
+          className="p-6 rounded-xl border border-border bg-card hover:border-accent/50 hover:shadow-lg hover:-translate-y-1 transition-all flex items-center gap-4"
+        >
+          <div className="w-12 h-12 rounded-lg bg-accent/20 flex items-center justify-center">
+            <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div>
+            <p className="text-sm text-foreground-muted">Email</p>
+            <p className="font-medium">{contactInfo.email}</p>
+          </div>
+        </a>
+
+        <a
+          href={`tel:${contactInfo.phone}`}
+          className="p-6 rounded-xl border border-border bg-card hover:border-accent/50 hover:shadow-lg hover:-translate-y-1 transition-all flex items-center gap-4"
+        >
+          <div className="w-12 h-12 rounded-lg bg-accent/20 flex items-center justify-center">
+            <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+          </div>
+          <div>
+            <p className="text-sm text-foreground-muted">Phone</p>
+            <p className="font-medium">{contactInfo.phone}</p>
+          </div>
+        </a>
+
+        <a
+          href={contactInfo.resume}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-6 rounded-xl border border-border bg-card hover:border-accent/50 hover:shadow-lg hover:-translate-y-1 transition-all flex items-center gap-4"
+        >
+          <div className="w-12 h-12 rounded-lg bg-accent/20 flex items-center justify-center">
+            <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <div>
+            <p className="text-sm text-foreground-muted">Resume / CV</p>
+            <p className="font-medium">View Document</p>
+          </div>
+        </a>
       </div>
     </section>
   );
