@@ -23,21 +23,32 @@ const PIXEL_HEART = [
 export default function Cursor() {
   const [trails, setTrails] = useState<TrailHeart[]>([]);
   const idCounter = useRef(0);
+  const lastPos = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      idCounter.current += 1;
-      const newTrail: TrailHeart = {
-        id: idCounter.current,
-        x: e.clientX,
-        y: e.clientY,
-        createdAt: Date.now(),
-      };
-      setTrails(prev => [...prev, newTrail].slice(-25));
+      lastPos.current = { x: e.clientX, y: e.clientY };
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (lastPos.current.x === 0 && lastPos.current.y === 0) return;
+      
+      idCounter.current += 1;
+      const newTrail: TrailHeart = {
+        id: idCounter.current,
+        x: lastPos.current.x,
+        y: lastPos.current.y,
+        createdAt: Date.now(),
+      };
+      setTrails(prev => [...prev, newTrail].slice(-30));
+    }, 30);
+
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
