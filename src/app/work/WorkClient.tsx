@@ -180,16 +180,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         <p className="text-xs text-foreground-muted">
           {new Date(project.completionDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
         </p>
-        {project.demoUrl && (
-          <a
-            href={project.demoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs px-3 py-1.5 bg-accent text-white rounded-full font-medium hover:bg-accent/90 transition-colors"
-          >
-            Live Demo
-          </a>
-        )}
       </div>
     </div>
   );
